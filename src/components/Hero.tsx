@@ -77,15 +77,15 @@ export const Hero = () => {
         className="relative z-20 w-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          animate={{ x: 0, y: 0, scale: 1 }}
+          animate={{ x: isCampaignSlide ? 0 : 0, y: 0, scale: 1 }}
           transition={{
             duration: 0.6,
             ease: [0.22, 1, 0.36, 1],
           }}
-          style={{ transformOrigin: "left center" }}
+          style={{ transformOrigin: isCampaignSlide ? "left center" : "right center" }}
           className="grid grid-cols-1 gap-12 items-center w-full"
         >
-          <div className="text-left w-full max-w-3xl mr-auto">
+          <div className="text-left md:text-right w-full max-w-3xl ml-auto mr-0">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export const Hero = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col max-sm:mb-2 md:mb-6 mt-36"
+              className="flex flex-col max-sm:mb-2 md:mb-6 mt-36 items-end"
             >
               <div className="mb-6 h-px w-20 bg-energy/50" />
 
@@ -126,7 +126,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col max-sm:gap-2 md:flex-row items-center justify-start gap-6"
+              className="flex flex-col max-sm:gap-2 md:flex-row items-center justify-end gap-6"
             >
               <motion.a
                 whileHover={{ scale: 1.05 }}
@@ -152,7 +152,7 @@ export const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="max-sm:mt-3 md:mt-20 flex flex-wrap justify-start max-sm:gap-5 md:gap-10 text-[9px] text-foreground/50 font-black uppercase tracking-[0.4em]"
+              className="max-sm:mt-3 md:mt-20 flex flex-wrap justify-end max-sm:gap-5 md:gap-10 text-[9px] text-foreground/50 font-black uppercase tracking-[0.4em]"
             >
               <span>PRECISÃO</span>
               <span>•</span>
