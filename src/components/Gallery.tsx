@@ -12,7 +12,6 @@ import terra_legend from "@/assets/terra_legend.jpg";
 import xbri_brutus from "@/assets/xbri_brutus.jpg";
 import pneu_detalhe from "@/assets/pneu_detalhe.jpg";
 import galeria_estoque from "@/assets/galeria_estoque.jpg";
-import trator_campo from "@/assets/trator_campo.jpg";
 import galeria_galpao_estoque from "@/assets/galeria_galpao_estoque.jpg";
 import galeria_alinhamento_novo from "@/assets/galeria_alinhamento_novo.jpg";
 import galeria_area_descanso from "@/assets/galeria_area_descanso.jpg";
@@ -35,7 +34,6 @@ const images = [
   { url: interior, title: "ESTRUTURA", desc: "Instalações modernas", category: "ESTRUTURA" },
   { url: produtos, title: "PRODUTOS", desc: "As melhores marcas", category: "PNEUS" },
   { url: pneu_detalhe, title: "SEGURANÇA", desc: "Check-up completo", category: "TECNOLOGIA" },
-  { url: trator_campo, title: "CAMPO", desc: "Soluções robustas para agricultura", category: "AGRÍCOLA" },
 ];
 
 const categories = ["TODAS", "FACHADA", "ESTRUTURA", "TECNOLOGIA", "PNEUS", "AGRÍCOLA", "ATENDIMENTO"];
