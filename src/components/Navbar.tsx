@@ -102,12 +102,12 @@ export const Navbar = () => {
     <>
       <motion.nav 
         style={{ 
-          padding: navPadding,
-          // scale is controlled by the slide animation below
+          padding: !isMobile && isHeroCampaign ? "0.55rem 0.8rem" : navPadding,
           backgroundColor: isDark
             ? `rgba(15, 15, 15, ${isScrolled ? 0.9 : 0.6})`
             : `rgba(255, 255, 255, ${isScrolled ? 0.9 : 0.6})`,
-          marginTop: navMarginTop,
+          marginTop: !isMobile && isHeroCampaign ? "0.15rem" : navMarginTop,
+          transformOrigin: "top center",
         }}
         animate={!isMobile ? (isHeroCampaign ? "campaign" : "normal") : undefined}
         variants={{
@@ -124,10 +124,10 @@ export const Navbar = () => {
             left: "50%",
             right: "auto",
             x: "-50%",
-            y: 8,
+            y: 0,
             width: "95%",
             maxWidth: "1200px",
-            scale: 0.88,
+            scale: 0.72,
           },
         }}
         transition={{
