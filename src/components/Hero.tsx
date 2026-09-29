@@ -83,9 +83,9 @@ export const Hero = () => {
             ease: [0.22, 1, 0.36, 1],
           }}
           style={{ transformOrigin: "left center" }}
-          className="grid grid-cols-1 gap-12 items-center"
+          className="grid grid-cols-1 gap-12 items-center w-full"
         >
-          <div className="text-left">
+          <div className="text-left w-full max-w-3xl mr-auto">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
