@@ -3,6 +3,16 @@ import { Star, Quote, CheckCircle } from "lucide-react";
 
 const testimonials = [
   {
+    name: "Claudio Ferreira",
+    text: "Quero parabenizar toda a equipe pelo atendimento tive uma ótima experiência com vilhenorte parabenizar também o colaborador zequinha e os de mais.",
+    rating: 5,
+    origin: "Google Review",
+    accent: "#f59e0b",
+    initials: "CF",
+    gradient: "from-amber-500/20 to-amber-900/5",
+    glow: "group-hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]"
+  },
+  {
     name: "Paulo Sidnei",
     text: "Oficina com excelente atendimento.",
     rating: 5,
@@ -21,16 +31,6 @@ const testimonials = [
     initials: "VB",
     gradient: "from-sky-500/20 to-sky-900/5",
     glow: "group-hover:shadow-[0_0_30px_rgba(14,165,233,0.15)]"
-  },
-  {
-    name: "Claudio Ferreira",
-    text: "Quero parabenizar toda a equipe pelo atendimento tive uma ótima experiência com vilhenorte parabenizar também o colaborador zequinha e os de mais.",
-    rating: 5,
-    origin: "Google Review",
-    accent: "#f59e0b",
-    initials: "CF",
-    gradient: "from-amber-500/20 to-amber-900/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]"
   },
   {
     name: "Vander Williann",
