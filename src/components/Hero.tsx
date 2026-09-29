@@ -1,9 +1,17 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/lib/config";
 
 import front1Asset from "@/assets/frente 1.jpg";
 import front2Asset from "@/assets/frente 2.jpg";
+
+const getCampaignOffset = (width: number) => {
+  if (width < 768) return { x: 0, y: 0 };
+  if (width < 1200) return { x: 360, y: -110 };
+  if (width < 1440) return { x: 520, y: -120 };
+  if (width < 1700) return { x: 650, y: -125 };
+  return { x: 760, y: -125 };
+};
 
 const heroSlides = [
   { type: "asset", src: front1Asset, campaign: false },
@@ -18,6 +26,8 @@ export const Hero = () => {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const [slide, setSlide] = useState(0);
+  const campaignX = useSpring(0, { stiffness: 70, damping: 20, mass: 0.8 });
+  const campaignY = useSpring(0, { stiffness: 70, damping: 20, mass: 0.8 });
 
   const activeSlide = heroSlides[slide];
   const isCampaignSlide = activeSlide.campaign;
@@ -27,6 +37,26 @@ export const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const updateCampaignPosition = () => {
+      const offset = isCampaignSlide
+        ? getCampaignOffset(window.innerWidth)
+        : { x: 0, y: 0 };
+
+      campaignX.set(offset.x);
+      campaignY.set(offset.y);
+    };
+
+    updateCampaignPosition();
+    window.addEventListener("resize", updateCampaignPosition);
+    return () => window.removeEventListener("resize", updateCampaignPosition);
+  }, [isCampaignSlide, campaignX, campaignY]);
+
+  useEffect(() => {
+    document.documentElement.dataset.heroCampaign = isCampaignSlide ? "true" : "false";
+    window.dispatchEvent(new Event("hero-campaign-change"));
+  }, [isCampaignSlide]);
+
   return (
     <section className={`relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20 ${isCampaignSlide ? "hero-campaign-slide" : ""}`}>
       {/* Background Images Fachada + artes da Rede de Lojas (slideshow) */}
@@ -34,18 +64,22 @@ export const Hero = () => {
         {heroSlides.map((item, index) => (
           <div
             key={item.src}
-            className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === index ? "opacity-100" : "opacity-0"}`}
+            className={`absolute inset-0 bg-cover bg-center lg:bg-[length:100%_100%] max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === index ? "opacity-100" : "opacity-0"}`}
             style={{ backgroundImage: `url(${item.src})` }}
           />
         ))}
-        <div className="absolute inset-0 bg-background/60 max-sm:bg-background/40 hero-photo-shade" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent max-sm:via-background/45 hero-photo-gradient" />
+        <div className={`absolute inset-0 hero-photo-shade ${isCampaignSlide ? "bg-background/10" : "bg-background/60 max-sm:bg-background/40"}`} />
+        <div className={`absolute inset-0 hero-photo-gradient ${isCampaignSlide ? "" : "bg-gradient-to-t from-background via-background/30 to-transparent max-sm:via-background/45"}`} />
       </div>
 
-      {!isCampaignSlide && (
-        <motion.div style={{ y, opacity }} className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16">
+      <motion.div style={{ y, opacity }} className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16">
+        <motion.div
+          style={{ x: campaignX, y: campaignY }}
+          transition={{ type: "spring", stiffness: 60, damping: 20 }}
+          className="grid grid-cols-1 gap-12 items-center"
+        >
           <div className="grid grid-cols-1 gap-12 items-center">
-            <div className="text-left">
+            <div className="text-left lg:max-w-[44rem]">
               <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -125,7 +159,7 @@ export const Hero = () => {
             </div>
           </div>
         </motion.div>
-      )}
+      </motion.div>
 
     </section>
   );

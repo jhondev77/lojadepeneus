@@ -5,12 +5,12 @@ import { siteConfig } from "@/lib/config";
 import { Menu, X, Phone, MessageSquare, Sun, Moon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const ThemeToggle = ({ isDark, onClick }: { isDark: boolean; onClick: () => void }) => (
+const ThemeToggle = ({ isDark, onClick, compact = false }: { isDark: boolean; onClick: () => void; compact?: boolean }) => (
   <button
     onClick={onClick}
     aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
     title={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
-    className="relative p-2 rounded-full border border-border bg-foreground/5 text-foreground hover:bg-foreground/10 transition-colors flex items-center justify-center overflow-hidden"
+    className={`relative rounded-full border border-border bg-foreground/5 text-foreground hover:bg-foreground/10 transition-colors flex items-center justify-center overflow-hidden ${compact ? "p-1.5" : "p-2"}`}
   >
     <AnimatePresence mode="wait" initial={false}>
       <motion.span
@@ -21,7 +21,7 @@ const ThemeToggle = ({ isDark, onClick }: { isDark: boolean; onClick: () => void
         transition={{ duration: 0.25 }}
         className="flex"
       >
-        {isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+        {isDark ? <Moon className={compact ? "w-4 h-4" : "w-5 h-5"} /> : <Sun className={compact ? "w-4 h-4" : "w-5 h-5"} />}
       </motion.span>
     </AnimatePresence>
   </button>
@@ -32,6 +32,9 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [isHeroCampaign, setIsHeroCampaign] = useState(
+    () => typeof document !== "undefined" && document.documentElement.dataset.heroCampaign === "true"
+  );
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -68,6 +71,16 @@ export const Navbar = () => {
   const navMarginTop = isMobile ? navMarginTopMob : navMarginTopDesk;
 
   useEffect(() => {
+    const handleHeroCampaign = () => {
+      setIsHeroCampaign(document.documentElement.dataset.heroCampaign === "true");
+    };
+
+    handleHeroCampaign();
+    window.addEventListener("hero-campaign-change", handleHeroCampaign);
+    return () => window.removeEventListener("hero-campaign-change", handleHeroCampaign);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -97,7 +110,16 @@ export const Navbar = () => {
             : `rgba(255, 255, 255, ${isScrolled ? 0.9 : 0.6})`,
           marginTop: navMarginTop,
         }}
-        className="fixed top-0 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-[1200px] rounded-full border border-border backdrop-blur-md transition-all duration-300 will-change-[padding,transform,background-color]"
+        animate={{
+          left: compactCampaign ? "auto" : "50%",
+          right: compactCampaign ? "2%" : "auto",
+          x: compactCampaign ? 0 : "-50%",
+          y: compactCampaign ? -28 : 0,
+          width: compactCampaign ? "min(39vw, 680px)" : "95%",
+          maxWidth: compactCampaign ? "680px" : "1200px",
+        }}
+        transition={{ type: "spring", stiffness: 80, damping: 22, mass: 0.8 }}
+        className="fixed top-0 z-[100] rounded-full border border-border backdrop-blur-md will-change-transform"
 
       >
         <div className="flex items-center justify-between w-full">
@@ -105,7 +127,7 @@ export const Navbar = () => {
             <motion.div 
               whileHover={{ rotate: 15 }}
               transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              className="h-8 sm:h-10 md:h-12 w-auto"
+              className={compactCampaign ? "h-8 sm:h-9 md:h-10 w-auto" : "h-8 sm:h-10 md:h-12 w-auto"}
             >
               <img 
                 src={siteConfig.logoUrl} 
@@ -123,15 +145,15 @@ export const Navbar = () => {
           </a>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
-            <div className="flex items-center gap-0.5 xl:gap-1 bg-foreground/5 p-1 rounded-full border border-border mr-2 xl:mr-4 relative">
+          <div className={`hidden lg:flex items-center ${compactCampaign ? "gap-1" : "gap-1 xl:gap-2"}`}>
+            <div className={`flex items-center ${compactCampaign ? "gap-0 p-0.5 mr-1" : "gap-0.5 xl:gap-1 p-1 mr-2 xl:mr-4"} bg-foreground/5 rounded-full border border-border relative`}>
               {navLinks.map((link) => (
                 <a 
                   key={link.name}
                   href={link.href}
                   onMouseEnter={() => setHoveredLink(link.name)}
                   onMouseLeave={() => setHoveredLink(null)}
-                  className={`px-2.5 xl:px-4 py-2 text-[13px] xl:text-sm font-medium transition-colors relative z-10 inline-flex items-center gap-1.5 ${
+                  className={`font-medium transition-colors relative z-10 inline-flex items-center gap-1.5 ${compactCampaign ? "px-1.5 py-1.5 text-[10px]" : "px-2.5 xl:px-4 py-2 text-[13px] xl:text-sm"} ${
                     hoveredLink === link.name ? "text-foreground" : "text-light-gray"
                   }`}
                 >
@@ -153,13 +175,13 @@ export const Navbar = () => {
               ))}
             </div>
 
-            <ThemeToggle isDark={isDark} onClick={toggleTheme} />
+            <ThemeToggle compact={compactCampaign} isDark={isDark} onClick={toggleTheme} />
             
             <motion.a 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href={`https://wa.me/${siteConfig.whatsapp}`}
-              className="bg-linear-to-r from-energy to-energy-light text-white px-5 xl:px-8 py-2.5 rounded-full font-bold text-sm hover:shadow-[0_0_20px_rgba(1,94,42,0.4)] transition-all flex items-center justify-center"
+              className={`bg-linear-to-r from-energy to-energy-light text-white rounded-full font-bold hover:shadow-[0_0_20px_rgba(1,94,42,0.4)] transition-all flex items-center justify-center ${compactCampaign ? "px-4 py-2 text-xs" : "px-5 xl:px-8 py-2.5 text-sm"}`}
             >
               Orçamento
             </motion.a>
