@@ -106,7 +106,7 @@ export const Hero = () => {
             >
               <div className="mb-6 h-px w-20 bg-energy/50" />
 
-              <h1 className="text-2xl sm:text-3xl md:text-[clamp(1.8rem,3.6vw,3.8rem)] font-black text-foreground mb-4 tracking-tighter uppercase leading-[1.1] font-manrope [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
+              <h1 className={`text-2xl sm:text-3xl md:text-[clamp(1.8rem,3.6vw,3.8rem)] ${isCampaignSlide ? "font-black" : "font-normal"} text-foreground mb-4 tracking-tighter uppercase leading-[1.1] font-manrope [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]`}>
                 SEGURANÇA, QUALIDADE<br />
                 E DURABILIDADE PARA<br />
                 <span className="text-energy italic">O SEU VEÍCULO.</span>
