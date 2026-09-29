@@ -23,7 +23,7 @@ export const stores: Store[] = [
   {
     id: "fox-jorge-teixeira-pvh",
     icon: "Car",
-    name: "Fox Jorge Teixeira - Porto Velho",
+    name: "Jorge Teixeira - Porto Velho",
     address: "Av. Governador Jorge Teixeira, 1159 – Nossa senhora das Graças",
     phone: "(69) 3217-3040",
     type: "Carros",
@@ -32,7 +32,7 @@ export const stores: Store[] = [
   {
     id: "fox-nacoes-unidas-pvh",
     icon: "CarFront",
-    name: "Fox Nações Unidas - Porto Velho",
+    name: "Nações Unidas - Porto Velho",
     address: "Av. Nações Unidas, 805 - Nossa senhora das Graças",
     phone: "(69) 3217-3030",
     type: "Carros",
@@ -41,7 +41,7 @@ export const stores: Store[] = [
   {
     id: "fox-recapagem-pvh",
     icon: "CircleDot",
-    name: "Fox Recapagem - Porto Velho",
+    name: "Recapagem - Porto Velho",
     address: "Rua da Beira, 9400 – Eldorado",
     phone: "(69) 3217-8800",
     type: "Caminhões",
@@ -50,7 +50,7 @@ export const stores: Store[] = [
   {
     id: "fox-ariquemes",
     icon: "Warehouse",
-    name: "Fox Ariquemes",
+    name: "Ariquemes",
     address: "Av. Canaã, 1717 – Áreas Especiais",
     phone: "(69) 3535-3270",
     type: "Carros e Caminhões",
@@ -59,7 +59,7 @@ export const stores: Store[] = [
   {
     id: "fox-ji-parana",
     icon: "Truck",
-    name: "Fox Ji-Paraná 1 Distrito",
+    name: "Ji-Paraná 1 Distrito",
     address: "Av. Transcontinental, 2444 – Casa Preta",
     phone: "(69) 3422-2711",
     type: "Carros e Caminhões",
@@ -68,7 +68,7 @@ export const stores: Store[] = [
   {
     id: "fox-cacoal",
     icon: "Building2",
-    name: "Fox Cacoal",
+    name: "Cacoal",
     address: "Av. Castelo Branco, 19558 – Centro",
     phone: "(69) 3441-2384",
     type: "Carros e Caminhões",
@@ -77,7 +77,7 @@ export const stores: Store[] = [
   {
     id: "fox-vilhena",
     icon: "Gauge",
-    name: "Fox Vilhena",
+    name: "Vilhena",
     address: "Av. Marechal Rondon, 3224 – Centro",
     phone: "(69) 3321-4155",
     type: "Carros",
@@ -86,7 +86,7 @@ export const stores: Store[] = [
   {
     id: "fox-recapagem-vilhena",
     icon: "Wrench",
-    name: "Fox Recapagem Vilhena",
+    name: "Recapagem Vilhena",
     address: "Av. Marechal Rondon, 7940 – Setor Industrial",
     phone: "(69) 3322-3365",
     type: "Caminhões",
