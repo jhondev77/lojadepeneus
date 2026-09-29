@@ -115,8 +115,10 @@ export const Navbar = () => {
                 left: isHeroCampaign ? "auto" : "50%",
                 right: isHeroCampaign ? "1.5%" : "auto",
                 x: isHeroCampaign ? 0 : "-50%",
-                width: isHeroCampaign ? "min(60vw, 820px)" : "95%",
-                maxWidth: isHeroCampaign ? "820px" : "1200px",
+                width: isHeroCampaign ? "min(52vw, 760px)" : "95%",
+                maxWidth: isHeroCampaign ? "760px" : "1200px",
+                scale: isHeroCampaign ? 0.90 : 1,
+                padding: isHeroCampaign ? "0.85rem 1rem" : "1.5rem 2rem",
               }
             : undefined
         }

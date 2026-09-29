@@ -34,6 +34,23 @@ export const Hero = () => {
     window.dispatchEvent(new Event("hero-campaign-change"));
   }, [isCampaignSlide]);
 
+  const getCampaignLayout = (width: number) => {
+    if (width < 768) return { x: 0, y: 0, scale: 1 };
+    if (width < 1200) return { x: 240, y: -10, scale: 0.86 };
+    if (width < 1440) return { x: 330, y: -15, scale: 0.82 };
+    if (width < 1700) return { x: 430, y: -20, scale: 0.80 };
+    return { x: 520, y: -25, scale: 0.78 };
+  };
+
+  const [viewportWidth, setViewportWidth] = useState(1440);
+
+  useEffect(() => {
+    const updateViewport = () => setViewportWidth(window.innerWidth);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
+
   return (
     <section
       className={`relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20 ${isCampaignSlide ? "hero-campaign-slide" : ""}`}
@@ -60,19 +77,7 @@ export const Hero = () => {
         className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          animate={
-            isCampaignSlide
-              ? {
-                  x: 340,
-                  y: -20,
-                  scale: 0.8,
-                }
-              : {
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                }
-          }
+          animate={getCampaignLayout(viewportWidth)}
           transition={{
             duration: 0.6,
             ease: [0.22, 1, 0.36, 1],
