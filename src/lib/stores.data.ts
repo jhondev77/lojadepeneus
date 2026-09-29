@@ -58,7 +58,7 @@ export const stores: Store[] = [
     id: "fox-ariquemes",
     icon: "Warehouse",
     name: "BARAO PNEUS",
-    address: "Comodoro - MT",
+    address: "Rodovia BR 364, Km 1260, Zona Rural, Comodoro - MT, 78310-000",
     phone: "",
     type: "Carros e Caminhões",
     city: "Comodoro",
