@@ -114,10 +114,12 @@ const StoreCard = ({
           <MapPin className="w-4 h-4 text-energy-light shrink-0 mt-0.5" />
           <span className="min-w-0 [overflow-wrap:anywhere]">{store.address}</span>
         </div>
-        <div className="flex items-center gap-3 text-foreground text-xs font-bold">
-          <Phone className="w-4 h-4 text-energy-light shrink-0" />
-          <span>{store.phone}</span>
-        </div>
+        {store.phone && (
+          <div className="flex items-center gap-3 text-foreground text-xs font-bold">
+            <Phone className="w-4 h-4 text-energy-light shrink-0" />
+            <span>{store.phone}</span>
+          </div>
+        )}
       </div>
 
       <div className="relative grid grid-cols-2 gap-2 mb-5" onClick={(e) => e.stopPropagation()}>
@@ -127,18 +129,22 @@ const StoreCard = ({
         >
           <Navigation className="w-3.5 h-3.5" /> Abrir no Maps
         </a>
-        <a
-          href={telUrl(store)}
-          className="flex items-center justify-center gap-1.5 py-3 sm:py-2.5 rounded-xl border border-border bg-foreground/[0.05] text-foreground text-[10px] font-black uppercase tracking-[0.12em] font-manrope hover:bg-foreground/[0.12] active:scale-95 transition-all"
-        >
-          <Phone className="w-3.5 h-3.5" /> Ligar
-        </a>
-        <a
-          href={waUrl(store)} target="_blank" rel="noopener noreferrer"
-          className="flex items-center justify-center gap-1.5 py-3 sm:py-2.5 rounded-xl border border-green-500/40 bg-green-500/10 text-green-500 text-[10px] font-black uppercase tracking-[0.12em] font-manrope hover:bg-green-500 hover:text-white active:scale-95 transition-all"
-        >
-          <WhatsAppIcon /> WhatsApp
-        </a>
+        {store.phone && (
+          <a
+            href={telUrl(store) ?? undefined}
+            className="flex items-center justify-center gap-1.5 py-3 sm:py-2.5 rounded-xl border border-border bg-foreground/[0.05] text-foreground text-[10px] font-black uppercase tracking-[0.12em] font-manrope hover:bg-foreground/[0.12] active:scale-95 transition-all"
+          >
+            <Phone className="w-3.5 h-3.5" /> Ligar
+          </a>
+        )}
+        {store.whatsapp && (
+          <a
+            href={waUrl(store) ?? undefined} target="_blank" rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 py-3 sm:py-2.5 rounded-xl border border-green-500/40 bg-green-500/10 text-green-500 text-[10px] font-black uppercase tracking-[0.12em] font-manrope hover:bg-green-500 hover:text-white active:scale-95 transition-all"
+          >
+            <WhatsAppIcon /> WhatsApp
+          </a>
+        )}
       </div>
 
       <div className="relative mt-auto flex items-center justify-between pt-4 border-t border-border" onClick={(e) => e.stopPropagation()}>
@@ -217,7 +223,7 @@ const StoreModal = ({
               <X className="w-4 h-4" />
             </button>
           </div>
-          <span className="text-energy-light font-bold tracking-[0.35em] text-[9px] uppercase mb-2">{store.city} · RO</span>
+          <span className="text-energy-light font-bold tracking-[0.35em] text-[9px] uppercase mb-2">{store.city} · {store.state}</span>
           <h3 className="text-foreground text-2xl font-black leading-tight normal-case tracking-tight mb-5 font-manrope [overflow-wrap:anywhere]">{store.name}</h3>
           <div className="space-y-3 mb-8 text-xs">
             <div className="flex gap-3 text-light-gray leading-relaxed"><MapPin className="w-4 h-4 text-energy-light shrink-0 mt-0.5" />{store.address}</div>
@@ -302,7 +308,7 @@ export const OtherStores = () => {
           <div className="max-w-3xl">
             <motion.span initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
               className="text-energy-light font-bold tracking-[0.4em] text-[9px] uppercase mb-4 block">
-              Nossa Rede em Rondônia
+              Nossa Rede de Lojas
             </motion.span>
             <motion.h2 key={`t${wave}`} initial={{ opacity: 0, y: 30, letterSpacing: "0.15em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "-0.05em" }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl md:text-5xl font-black text-foreground leading-[0.9] tracking-tighter uppercase font-manrope">
