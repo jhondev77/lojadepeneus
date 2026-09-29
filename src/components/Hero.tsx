@@ -21,6 +21,7 @@ export const Hero = () => {
   const [slide, setSlide] = useState(0);
   const activeSlide = heroSlides[slide];
   const isCampaignSlide = activeSlide.campaign;
+  const isLastSlide = slide === heroSlides.length - 1;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -74,7 +75,8 @@ export const Hero = () => {
           className="grid grid-cols-1 gap-12 items-center w-full"
         >
           <div className="text-left w-full max-w-3xl ml-0 mr-auto">
-            <motion.div
+            {!isLastSlide && (
+              <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -85,6 +87,7 @@ export const Hero = () => {
                 CACOAL / RONDÔNIA — {siteConfig.slogan}
               </span>
             </motion.div>
+            )}
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -133,6 +136,21 @@ export const Hero = () => {
                 CONHECER A LOJA ↓
               </motion.a>
             </motion.div>
+
+            {!isLastSlide && null}
+            {isLastSlide && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="inline-flex items-center max-sm:gap-3 md:gap-4 bg-background/60 max-sm:px-4 md:px-6 max-sm:py-2 md:py-2.5 rounded-full mt-3 md:mt-4 border border-border backdrop-blur-xl shadow-2xl relative max-w-full"
+              >
+                <div className="w-2 h-2 bg-energy animate-pulse rounded-full shadow-[0_0_8px_rgba(1,94,42,0.8)]" />
+                <span className="max-sm:text-[9px] md:text-[10px] font-black uppercase max-sm:tracking-[0.18em] md:tracking-[0.4em] max-sm:leading-relaxed text-foreground/90">
+                  CACOAL / RONDÔNIA — {siteConfig.slogan}
+                </span>
+              </motion.div>
+            )}
 
             <motion.div
               initial={{ opacity: 0 }}
