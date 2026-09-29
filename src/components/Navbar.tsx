@@ -134,7 +134,7 @@ export const Navbar = () => {
           duration: 0.7,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="fixed top-0 z-[100] rounded-full border border-border backdrop-blur-md will-change-transform"
+        className="fixed top-0 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] max-w-[1200px] z-[100] rounded-full border border-border backdrop-blur-md will-change-transform"
 
       >
         <div className="flex items-center justify-between w-full">
