@@ -85,7 +85,7 @@ export const Hero = () => {
           style={{ transformOrigin: isCampaignSlide ? "left center" : "right center" }}
           className="grid grid-cols-1 gap-12 items-center w-full"
         >
-          <div className={`${isCampaignSlide ? "text-left ml-0 mr-auto" : "text-right ml-auto mr-0"} w-full max-w-3xl`}>
+          <div className={`${isCampaignSlide ? "text-right ml-auto mr-0" : "text-left ml-0 mr-auto"} w-full max-w-3xl`}>
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export const Hero = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className={`flex flex-col max-sm:mb-2 md:mb-6 mt-36 ${isCampaignSlide ? "items-start" : "items-end"}`}
+              className={`flex flex-col max-sm:mb-2 md:mb-6 mt-36 ${isCampaignSlide ? "items-end" : "items-start"}`}
             >
               <div className="mb-6 h-px w-20 bg-energy/50" />
 
@@ -126,7 +126,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className={`flex flex-col max-sm:gap-2 md:flex-row items-center ${isCampaignSlide ? "justify-start" : "justify-end"} gap-6`}
+              className={`flex flex-col max-sm:gap-2 md:flex-row items-center ${isCampaignSlide ? "justify-end" : "justify-start"} gap-6`}
             >
               <motion.a
                 whileHover={{ scale: 1.05 }}
@@ -152,7 +152,7 @@ export const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className={`max-sm:mt-3 md:mt-20 flex flex-wrap ${isCampaignSlide ? "justify-start" : "justify-end"} max-sm:gap-5 md:gap-10 text-[9px] text-foreground/50 font-black uppercase tracking-[0.4em]`}
+              className={`max-sm:mt-3 md:mt-20 flex flex-wrap ${isCampaignSlide ? "justify-end" : "justify-start"} max-sm:gap-5 md:gap-10 text-[9px] text-foreground/50 font-black uppercase tracking-[0.4em]`}
             >
               <span>PRECISÃO</span>
               <span>•</span>
