@@ -78,7 +78,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="inline-flex items-center max-sm:gap-3 md:gap-4 bg-background/60 max-sm:px-4 md:px-6 max-sm:py-2 md:py-2.5 rounded-full max-sm:mb-0 md:mb-10 border border-border backdrop-blur-xl shadow-2xl relative max-w-full"
+              className="inline-flex items-center max-sm:gap-3 md:gap-4 bg-background/60 max-sm:px-4 md:px-6 max-sm:py-2 md:py-2.5 rounded-full max-sm:mb-0 md:mb-1 border border-border backdrop-blur-xl shadow-2xl relative max-w-full"
             >
               <div className="w-2 h-2 bg-energy animate-pulse rounded-full shadow-[0_0_8px_rgba(1,94,42,0.8)]" />
               <span className="max-sm:text-[9px] md:text-[10px] font-black uppercase max-sm:tracking-[0.18em] md:tracking-[0.4em] max-sm:leading-relaxed text-foreground/90">
@@ -92,8 +92,6 @@ export const Hero = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col max-sm:mb-2 md:mb-6 mt-1 items-start"
             >
-              <div className="mb-6 h-px w-20 bg-energy/50" />
-
               <h1 className={`text-2xl sm:text-3xl md:text-[clamp(1.8rem,3.6vw,3.8rem)] ${isCampaignSlide ? "font-black" : "font-normal"} text-foreground mb-4 tracking-tighter uppercase leading-[1.1] font-manrope [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]`}>
                 SEGURANÇA, QUALIDADE<br />
                 E DURABILIDADE PARA<br />
