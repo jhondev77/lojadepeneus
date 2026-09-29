@@ -107,26 +107,16 @@ export const Navbar = () => {
             ? `rgba(15, 15, 15, ${isScrolled ? 0.9 : 0.6})`
             : `rgba(255, 255, 255, ${isScrolled ? 0.9 : 0.6})`,
           marginTop: !isMobile && isHeroCampaign ? "0.15rem" : navMarginTop,
+          left: "50%",
+          x: "-50%",
           transformOrigin: "top center",
         }}
         animate={!isMobile ? (isHeroCampaign ? "campaign" : "normal") : undefined}
         variants={{
           normal: {
-            left: "50%",
-            right: "auto",
-            x: "-50%",
-            y: 0,
-            width: "95%",
-            maxWidth: "1200px",
             scale: 1,
           },
           campaign: {
-            left: "50%",
-            right: "auto",
-            x: "-50%",
-            y: 0,
-            width: "95%",
-            maxWidth: "1200px",
             scale: 0.72,
           },
         }}
@@ -134,8 +124,7 @@ export const Navbar = () => {
           duration: 0.7,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="fixed top-0 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] max-w-[1200px] z-[100] rounded-full border border-border backdrop-blur-md will-change-transform"
-
+        className="fixed top-0 z-[100] w-[calc(100%-1rem)] lg:w-[95%] max-w-[1200px] rounded-full border border-border backdrop-blur-md will-change-transform"
       >
         <div className="flex items-center justify-between w-full">
           <a href="#" className="flex items-center group">
