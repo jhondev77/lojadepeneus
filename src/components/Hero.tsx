@@ -10,7 +10,7 @@ const heroSlides = [
   { src: front1Asset, campaign: false },
   { src: front2Asset, campaign: false },
   { src: "/rede-de-lojas-vilhenorte-barao-1.webp", campaign: true },
-  { src: novaHeroAsset, campaign: false },
+  { src: novaHeroAsset, campaign: true },
 ];
 
 export const Hero = () => {
