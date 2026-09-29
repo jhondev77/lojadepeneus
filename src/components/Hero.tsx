@@ -47,7 +47,7 @@ export const Hero = () => {
             className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === index ? "opacity-100" : "opacity-0"}`}
             style={{
               backgroundImage: `url(${item.src})`,
-              backgroundPosition: item.campaign ? "center 25%" : "center center",
+              backgroundPosition: item.campaign ? "center top" : "center center",
             }}
           />
         ))}
