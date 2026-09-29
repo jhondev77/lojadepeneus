@@ -33,6 +33,18 @@ export const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
   const isMobile = useIsMobile();
+  const [isHeroCampaign, setIsHeroCampaign] = useState(false);
+
+  useEffect(() => {
+    const syncHeroCampaign = () => {
+      setIsHeroCampaign(document.documentElement.dataset.heroCampaign === "true");
+    };
+
+    syncHeroCampaign();
+    window.addEventListener("hero-campaign-change", syncHeroCampaign);
+
+    return () => window.removeEventListener("hero-campaign-change", syncHeroCampaign);
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem("vn-theme");
@@ -97,6 +109,15 @@ export const Navbar = () => {
             : `rgba(255, 255, 255, ${isScrolled ? 0.9 : 0.6})`,
           marginTop: navMarginTop,
         }}
+        animate={
+          !isMobile
+            ? {
+                marginLeft: isHeroCampaign ? 70 : 0,
+                scale: isHeroCampaign ? 0.97 : 1,
+              }
+            : undefined
+        }
+        transition={{ type: "spring", stiffness: 75, damping: 20, mass: 0.8 }}
         className="fixed top-0 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-[1200px] rounded-full border border-border backdrop-blur-md transition-all duration-300 will-change-[padding,transform,background-color]"
 
       >

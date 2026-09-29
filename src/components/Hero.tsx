@@ -14,10 +14,9 @@ const heroSlides = [
 
 const getCampaignOffset = (width: number) => {
   if (width < 768) return { x: 0, y: 0 };
-  if (width < 1200) return { x: 220, y: -70 };
-  if (width < 1440) return { x: 360, y: -80 };
-  if (width < 1700) return { x: 500, y: -85 };
-  return { x: 640, y: -90 };
+  if (width < 1200) return { x: 70, y: -15 };
+  if (width < 1440) return { x: 90, y: -18 };
+  return { x: 110, y: -20 };
 };
 
 export const Hero = () => {
@@ -83,7 +82,7 @@ export const Hero = () => {
       >
         <motion.div
           style={{ x: contentX, y: contentY }}
-          className={`grid grid-cols-1 gap-12 items-center transition-colors ${isCampaignSlide ? "lg:max-w-[44rem] md:rounded-3xl md:bg-black/15 md:backdrop-blur-[2px] md:p-6" : ""}`}
+          className="grid grid-cols-1 gap-12 items-center"
         >
           <div className="text-left">
             <motion.div
