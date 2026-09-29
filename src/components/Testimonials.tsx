@@ -3,42 +3,42 @@ import { Star, Quote, CheckCircle } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Carlos Alberto",
-    text: "Atendimento de primeira! O alinhamento 3D deles é muito preciso. Recomendo a todos em Cacoal.",
+    name: "Paulo Sidnei",
+    text: "Oficina com excelente atendimento.",
     rating: 5,
     origin: "Google Review",
-    accent: "#22c55e", // Green
-    initials: "CA",
+    accent: "#22c55e",
+    initials: "PS",
     gradient: "from-green-500/20 to-green-900/5",
     glow: "group-hover:shadow-[0_0_30px_rgba(34,197,94,0.15)]"
   },
   {
-    name: "Mariana Silva",
-    text: "Loja muito organizada, sala de espera confortável com Wi-Fi. Fui muito bem atendida.",
+    name: "Valcimar Braun",
+    text: "Ótima empresa excelente em atendimento muito bom.",
     rating: 5,
     origin: "Google Review",
-    accent: "#0ea5e9", // Teal/Blue
-    initials: "MS",
+    accent: "#0ea5e9",
+    initials: "VB",
     gradient: "from-sky-500/20 to-sky-900/5",
     glow: "group-hover:shadow-[0_0_30px_rgba(14,165,233,0.15)]"
   },
   {
-    name: "João Pereira",
-    text: "Pneus de alta qualidade e montagem rápida. O preço é justo e o atendimento é honesto.",
+    name: "Claudio Ferreira",
+    text: "Quero parabenizar toda a equipe pelo atendimento tive uma ótima experiência com vilhenorte parabenizar também o colaborador zequinha e os de mais.",
     rating: 5,
     origin: "Google Review",
-    accent: "#f59e0b", // Amber/Gold
-    initials: "JP",
+    accent: "#f59e0b",
+    initials: "CF",
     gradient: "from-amber-500/20 to-amber-900/5",
     glow: "group-hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]"
   },
   {
-    name: "Ricardo Mendes",
-    text: "Excelente pós-venda. Tive uma dúvida sobre a garantia e resolveram na hora com muita atenção.",
+    name: "Vander Williann",
+    text: "Profissionais capacitados pra lhe melhor atender, super recomendo.",
     rating: 5,
     origin: "Google Review",
-    accent: "#a855f7", // Purple
-    initials: "RM",
+    accent: "#a855f7",
+    initials: "VW",
     gradient: "from-purple-500/20 to-purple-900/5",
     glow: "group-hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]"
   }
