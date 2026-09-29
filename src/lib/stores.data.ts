@@ -24,8 +24,8 @@ export const stores: Store[] = [
   {
     id: "fox-jorge-teixeira-pvh",
     icon: "Gauge",
-    name: "VILHENORTE PNEUS",
-    address: "Vilhena - RO",
+    name: "Vilhenorte Pneus",
+    address: "Avenida Celso Mazutti, 3045 - Jardim América, Vilhena - RO, 76980-811",
     phone: "(69) 2101-3213",
     type: "Carros e Caminhões",
     city: "Vilhena",
@@ -35,8 +35,8 @@ export const stores: Store[] = [
   {
     id: "fox-nacoes-unidas-pvh",
     icon: "Car",
-    name: "VILHENORTE COMERCIO",
-    address: "São Miguel do Guaporé - RO",
+    name: "Vilhenorte Comercio",
+    address: "Avenida João Batista Figueiredo, 3036, São Miguel do Guaporé - RO, 76932-000",
     phone: "(69) 3197-0217",
     type: "Carros e Caminhões",
     city: "São Miguel do Guaporé",
@@ -46,8 +46,8 @@ export const stores: Store[] = [
   {
     id: "fox-cacoal",
     icon: "Building2",
-    name: "VILHENORTE PNEUS",
-    address: "Cacoal - RO",
+    name: "Vilhenorte Pneus",
+    address: "Avenida Castelo Branco, 20116 - Novo Horizonte, Cacoal - RO",
     phone: "(69) 3180-0018",
     type: "Carros e Caminhões",
     city: "Cacoal",
@@ -57,7 +57,7 @@ export const stores: Store[] = [
   {
     id: "fox-ariquemes",
     icon: "Warehouse",
-    name: "BARAO PNEUS",
+    name: "Barao Pneus",
     address: "Rodovia BR 364, Km 1260, Zona Rural, Comodoro - MT, 78310-000",
     phone: "",
     type: "Carros e Caminhões",
@@ -68,8 +68,8 @@ export const stores: Store[] = [
   {
     id: "fox-ji-parana",
     icon: "Truck",
-    name: "BARAO PNEUS",
-    address: "Juína - MT",
+    name: "Barao Pneus",
+    address: "Avenida JK, 2167N - Setor Expansão Comercial, Juína - MT",
     phone: "",
     type: "Carros e Caminhões",
     city: "Juína",
@@ -79,8 +79,8 @@ export const stores: Store[] = [
   {
     id: "fox-vilhena",
     icon: "Wrench",
-    name: "VILHENORTE AUTOPEÇAS",
-    address: "Vilhena - RO",
+    name: "Vilhenorte Autopeças",
+    address: "Avenida Celso Mazutti, 3045 - Jardim América, Vilhena - RO, 76980-811",
     phone: "(69) 2101-3213",
     type: "Carros e Caminhões",
     city: "Vilhena",
@@ -89,8 +89,8 @@ export const stores: Store[] = [
   {
     id: "fox-recapagem-vilhena",
     icon: "CarFront",
-    name: "VILHENORTE PNEUS",
-    address: "Espigão d'Oeste - RO",
+    name: "Vilhenorte Pneus",
+    address: "Avenida Sete de Setembro, 1662 - Vista Alegre, Espigão d'Oeste - RO, 76974-000",
     phone: "(69) 9931-3074",
     type: "Carros e Caminhões",
     city: "Espigão d'Oeste",
@@ -100,7 +100,7 @@ export const stores: Store[] = [
 ];
 
 /* ---------- Helpers de links (Google Maps / telefone) ---------- */
-const query = (s: Store) => `${s.name}, ${s.city}, ${s.state}, Brasil`;
+const query = (s: Store) => `${s.name}, ${s.address}, Brasil`;
 
 /** Abre a loja no Google Maps */
 export const mapsUrl = (s: Store) =>
