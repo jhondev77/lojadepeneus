@@ -77,7 +77,7 @@ export const Hero = () => {
         className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          animate={getCampaignLayout(viewportWidth)}
+          animate={isCampaignSlide ? getCampaignLayout(viewportWidth) : { x: 0, y: 0, scale: 1 }}
           transition={{
             duration: 0.6,
             ease: [0.22, 1, 0.36, 1],
