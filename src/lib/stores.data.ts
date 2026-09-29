@@ -16,6 +16,7 @@ export interface Store {
   type: StoreType;
   city: string;
   state: "RO" | "MT";
+  cep: string;
   /** Número de WhatsApp da loja, quando informado. */
   whatsapp?: string;
 }
@@ -25,22 +26,24 @@ export const stores: Store[] = [
     id: "fox-jorge-teixeira-pvh",
     icon: "Gauge",
     name: "Vilhenorte Pneus",
-    address: "Avenida Celso Mazutti, 3045 - Jardim América, Vilhena - RO, 76980-811",
+    address: "Avenida Celso Mazutti, 3045 - Jardim América, Vilhena - RO",
     phone: "(69) 2101-3213",
     type: "Carros e Caminhões",
     city: "Vilhena",
     state: "RO",
+    cep: "76980-811",
     whatsapp: "(69) 99243-5795",
   },
   {
     id: "fox-nacoes-unidas-pvh",
     icon: "Car",
     name: "Vilhenorte Comercio",
-    address: "Avenida João Batista Figueiredo, 3036, São Miguel do Guaporé - RO, 76932-000",
+    address: "Avenida João Batista Figueiredo, 3036, Aeroporto, São Miguel do Guaporé - RO",
     phone: "(69) 3197-0217",
     type: "Carros e Caminhões",
     city: "São Miguel do Guaporé",
     state: "RO",
+    cep: "76932-000",
     whatsapp: "(69) 98444-9138",
   },
   {
@@ -52,17 +55,19 @@ export const stores: Store[] = [
     type: "Carros e Caminhões",
     city: "Cacoal",
     state: "RO",
+    cep: "76962-070",
     whatsapp: "(69) 99263-0889",
   },
   {
     id: "fox-ariquemes",
     icon: "Warehouse",
     name: "Barao Pneus",
-    address: "Rodovia BR 364, Km 1260, Zona Rural, Comodoro - MT, 78310-000",
+    address: "Rodovia BR 364, Km 1260, Zona Rural, Comodoro - MT",
     phone: "",
     type: "Carros e Caminhões",
     city: "Comodoro",
     state: "MT",
+    cep: "78310-000",
     whatsapp: "(65) 99214-5620",
   },
   {
@@ -74,33 +79,36 @@ export const stores: Store[] = [
     type: "Carros e Caminhões",
     city: "Juína",
     state: "MT",
+    cep: "78320-000",
     whatsapp: "(66) 99252-9741",
   },
   {
     id: "fox-vilhena",
     icon: "Wrench",
     name: "Vilhenorte Autopeças",
-    address: "Avenida Celso Mazutti, 3045 - Jardim América, Vilhena - RO, 76980-811",
+    address: "Rua Cezar Augusto Voigt, 102 - Jardim América, Vilhena - RO",
     phone: "(69) 2101-3213",
     type: "Carros e Caminhões",
     city: "Vilhena",
     state: "RO",
+    cep: "76980-760",
   },
   {
     id: "fox-recapagem-vilhena",
     icon: "CarFront",
     name: "Vilhenorte Pneus",
-    address: "Avenida Sete de Setembro, 1662 - Vista Alegre, Espigão d'Oeste - RO, 76974-000",
+    address: "Avenida Sete de Setembro, 1662 - Vista Alegre, Espigão d'Oeste - RO",
     phone: "(69) 9931-3074",
     type: "Carros e Caminhões",
     city: "Espigão d'Oeste",
     state: "RO",
+    cep: "76974-000",
     whatsapp: "(69) 99207-3530",
   },
 ];
 
 /* ---------- Helpers de links (Google Maps / telefone) ---------- */
-const query = (s: Store) => `${s.name}, ${s.address}, Brasil`;
+const query = (s: Store) => `${s.name}, ${s.address}, CEP ${s.cep}, Brasil`;
 
 /** Abre a loja no Google Maps */
 export const mapsUrl = (s: Store) =>
