@@ -68,11 +68,12 @@ export const stores: Store[] = [
   {
     id: "fox-cacoal",
     icon: "Building2",
-    name: "Cacoal",
+    name: "FILIAL CACOAL",
     address: "Av. Castelo Branco, 19558 – Centro",
-    phone: "(69) 3441-2384",
+    phone: "(69) 3180-0018",
     type: "Carros e Caminhões",
     city: "Cacoal",
+    whatsapp: "(69) 99263-0889",
   },
   {
     id: "fox-vilhena",
