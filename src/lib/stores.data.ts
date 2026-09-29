@@ -68,7 +68,7 @@ export const stores: Store[] = [
   {
     id: "fox-cacoal",
     icon: "Building2",
-    name: "FILIAL CACOAL",
+    name: "VILHENORTE PNEUS",
     address: "Av. Castelo Branco, 19558 – Centro",
     phone: "(69) 3180-0018",
     type: "Carros e Caminhões",
