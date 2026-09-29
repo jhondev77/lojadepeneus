@@ -12,23 +12,12 @@ const heroSlides = [
   { src: "/rede-de-lojas-vilhenorte-barao-2.webp", campaign: true },
 ];
 
-const getCampaignLayout = (width: number) => {
-  if (width < 768) return { x: 0, y: 0, scale: 1 };
-  if (width < 1200) return { x: 280, y: -20, scale: 0.84 };
-  if (width < 1440) return { x: 360, y: -25, scale: 0.82 };
-  return { x: 460, y: -30, scale: 0.80 };
-};
-
 export const Hero = () => {
   const { scrollY } = useScroll();
-  const scrollYPosition = useTransform(scrollY, [0, 500], [0, 200]);
+  const y = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const [slide, setSlide] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(1440);
-
-
-
   const activeSlide = heroSlides[slide];
   const isCampaignSlide = activeSlide.campaign;
 
@@ -41,21 +30,14 @@ export const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const updateViewport = () => setViewportWidth(window.innerWidth);
-
-    updateViewport();
-    window.addEventListener("resize", updateViewport);
-
-    return () => window.removeEventListener("resize", updateViewport);
-  }, []);
-
-  useEffect(() => {
     document.documentElement.dataset.heroCampaign = isCampaignSlide ? "true" : "false";
     window.dispatchEvent(new Event("hero-campaign-change"));
   }, [isCampaignSlide]);
 
   return (
-    <section className={`relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20 ${isCampaignSlide ? "hero-campaign-slide" : ""}`}>
+    <section
+      className={`relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20 ${isCampaignSlide ? "hero-campaign-slide" : ""}`}
+    >
       <div className="absolute inset-0 z-0">
         {heroSlides.map((item, index) => (
           <div
@@ -64,17 +46,38 @@ export const Hero = () => {
             style={{ backgroundImage: `url(${item.src})` }}
           />
         ))}
-        <div className={`absolute inset-0 hero-photo-shade transition-opacity duration-700 ${isCampaignSlide ? "bg-background/10" : "bg-background/60 max-sm:bg-background/40"}`} />
-        <div className={`absolute inset-0 hero-photo-gradient transition-opacity duration-700 ${isCampaignSlide ? "opacity-0" : "bg-gradient-to-t from-background via-background/30 to-transparent max-sm:via-background/45 opacity-100"}`} />
+
+        <div
+          className={`absolute inset-0 hero-photo-shade transition-opacity duration-700 ${isCampaignSlide ? "bg-background/10" : "bg-background/60 max-sm:bg-background/40"}`}
+        />
+        <div
+          className={`absolute inset-0 hero-photo-gradient transition-opacity duration-700 ${isCampaignSlide ? "opacity-0" : "bg-gradient-to-t from-background via-background/30 to-transparent max-sm:via-background/45 opacity-100"}`}
+        />
       </div>
 
       <motion.div
-        style={{ y: scrollYPosition, opacity }}
+        style={{ y, opacity }}
         className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          animate={getCampaignLayout(viewportWidth)}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          animate={
+            isCampaignSlide
+              ? {
+                  x: 340,
+                  y: -20,
+                  scale: 0.8,
+                }
+              : {
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                }
+          }
+          transition={{
+            duration: 0.6,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          style={{ transformOrigin: "left center" }}
           className="grid grid-cols-1 gap-12 items-center"
         >
           <div className="text-left">
