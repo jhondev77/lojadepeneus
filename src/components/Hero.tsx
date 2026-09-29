@@ -64,7 +64,7 @@ export const Hero = () => {
         {heroSlides.map((item, index) => (
           <div
             key={item.src}
-            className={`absolute inset-0 bg-cover bg-center lg:bg-[length:100%_100%] max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === index ? "opacity-100" : "opacity-0"}`}
+            className={`absolute inset-0 bg-cover bg-center ${item.campaign ? "lg:bg-[length:100%_100%]" : ""} max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === index ? "opacity-100" : "opacity-0"}`}
             style={{ backgroundImage: `url(${item.src})` }}
           />
         ))}
