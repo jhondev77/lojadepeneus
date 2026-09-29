@@ -74,10 +74,10 @@ export const Hero = () => {
 
       <motion.div
         style={{ y, opacity }}
-        className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16"
+        className="relative z-20 w-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          animate={isCampaignSlide ? getCampaignLayout(viewportWidth) : { x: 0, y: 0, scale: 1 }}
+          animate={{ x: 0, y: 0, scale: 1 }}
           transition={{
             duration: 0.6,
             ease: [0.22, 1, 0.36, 1],
