@@ -113,11 +113,17 @@ export const Navbar = () => {
           left: "50%",
           right: "auto",
           x: "-50%",
-          width: "95%",
-          maxWidth: "1200px",
-          scale: 1,
+          y: isHeroCampaign ? -2 : 0,
+          marginTop: isHeroCampaign ? "0.4rem" : "1.5rem",
+          width: isHeroCampaign ? "min(86vw, 1080px)" : "95%",
+          maxWidth: isHeroCampaign ? "1080px" : "1200px",
+          scale: isHeroCampaign ? 0.9 : 1,
+          padding: isHeroCampaign ? "0.65rem 0.85rem" : "1.5rem 2rem",
         } : undefined}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{
+          duration: 0.65,
+          ease: [0.22, 1, 0.36, 1],
+        }}
         className="fixed top-0 z-[100] rounded-full border border-border backdrop-blur-md will-change-transform"
 
       >
