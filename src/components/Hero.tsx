@@ -90,7 +90,7 @@ export const Hero = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col max-sm:mb-2 md:mb-6 mt-36 items-start"
+              className="flex flex-col max-sm:mb-2 md:mb-6 mt-12 items-start"
             >
               <div className="mb-6 h-px w-20 bg-energy/50" />
 
