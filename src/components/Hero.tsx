@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { siteConfig } from "@/lib/config";
 
 import front1Asset from "@/assets/frente 1.jpg";
@@ -34,39 +34,6 @@ export const Hero = () => {
     window.dispatchEvent(new Event("hero-campaign-change"));
   }, [isCampaignSlide]);
 
-  const [viewportHeight, setViewportHeight] = useState(900);
-  const heroContentRef = useRef<HTMLDivElement>(null);
-  const [campaignLift, setCampaignLift] = useState(0);
-
-  useEffect(() => {
-    const updateViewport = () => setViewportHeight(window.innerHeight);
-    updateViewport();
-    window.addEventListener("resize", updateViewport);
-    return () => window.removeEventListener("resize", updateViewport);
-  }, []);
-
-  useEffect(() => {
-    if (!isCampaignSlide) {
-      setCampaignLift(0);
-      return;
-    }
-
-    const updateCampaignLift = () => {
-      const element = heroContentRef.current;
-      if (!element) return;
-
-      const top = element.getBoundingClientRect().top;
-      const safeTop = 96;
-      const maxLift = Math.max(0, top - safeTop);
-
-      // Move the whole block as far upward as possible while keeping it visible.
-      // Scale stays at 1, so nothing gets compacted.
-      setCampaignLift(maxLift);
-    };
-
-    const frame = requestAnimationFrame(updateCampaignLift);
-    return () => cancelAnimationFrame(frame);
-  }, [isCampaignSlide, viewportHeight]);
 
   return (
     <section
@@ -94,10 +61,9 @@ export const Hero = () => {
         className="relative z-20 w-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          ref={heroContentRef}
-          animate={{ x: 0, y: isCampaignSlide ? -campaignLift : 0, scale: 1 }}
+          animate={{ x: 0, y: isCampaignSlide ? 28 : 0, scale: isCampaignSlide ? 0.86 : 1 }}
           transition={{
-            duration: 0.8,
+            duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
           }}
           style={{ transformOrigin: "left center" }}
