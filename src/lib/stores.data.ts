@@ -61,7 +61,7 @@ export const stores: Store[] = [
   {
     id: "fox-ariquemes",
     icon: "Warehouse",
-    name: "Barao Pneus",
+    name: "Barão Pneus",
     address: "Rodovia BR 364, Km 1260, Zona Rural, Comodoro - MT",
     phone: "",
     type: "Carros e Caminhões",
@@ -73,7 +73,7 @@ export const stores: Store[] = [
   {
     id: "fox-ji-parana",
     icon: "Truck",
-    name: "Barao Pneus",
+    name: "Barão Pneus",
     address: "Avenida JK, 2167N - Setor Expansão Comercial, Juína - MT",
     phone: "",
     type: "Carros e Caminhões",
