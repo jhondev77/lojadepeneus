@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/lib/config";
 
@@ -12,11 +12,11 @@ const heroSlides = [
   { src: "/rede-de-lojas-vilhenorte-barao-2.webp", campaign: true },
 ];
 
-const getCampaignOffset = (width: number) => {
-  if (width < 768) return { x: 0, y: 0 };
-  if (width < 1200) return { x: 70, y: -15 };
-  if (width < 1440) return { x: 90, y: -18 };
-  return { x: 110, y: -20 };
+const getCampaignLayout = (width: number) => {
+  if (width < 768) return { x: 0, y: 0, scale: 1 };
+  if (width < 1200) return { x: 280, y: -20, scale: 0.84 };
+  if (width < 1440) return { x: 360, y: -25, scale: 0.82 };
+  return { x: 460, y: -30, scale: 0.80 };
 };
 
 export const Hero = () => {
@@ -27,8 +27,7 @@ export const Hero = () => {
   const [slide, setSlide] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(1440);
 
-  const contentX = useSpring(0, { stiffness: 70, damping: 22, mass: 0.8 });
-  const contentY = useSpring(0, { stiffness: 70, damping: 22, mass: 0.8 });
+
 
   const activeSlide = heroSlides[slide];
   const isCampaignSlide = activeSlide.campaign;
@@ -51,16 +50,9 @@ export const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const offset = isCampaignSlide
-      ? getCampaignOffset(viewportWidth)
-      : { x: 0, y: 0 };
-
-    contentX.set(offset.x);
-    contentY.set(offset.y);
-
     document.documentElement.dataset.heroCampaign = isCampaignSlide ? "true" : "false";
     window.dispatchEvent(new Event("hero-campaign-change"));
-  }, [isCampaignSlide, viewportWidth, contentX, contentY]);
+  }, [isCampaignSlide]);
 
   return (
     <section className={`relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20 ${isCampaignSlide ? "hero-campaign-slide" : ""}`}>
@@ -81,7 +73,8 @@ export const Hero = () => {
         className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          style={{ x: contentX, y: contentY }}
+          animate={getCampaignLayout(viewportWidth)}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="grid grid-cols-1 gap-12 items-center"
         >
           <div className="text-left">

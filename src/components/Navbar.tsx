@@ -112,13 +112,16 @@ export const Navbar = () => {
         animate={
           !isMobile
             ? {
-                marginLeft: isHeroCampaign ? 70 : 0,
-                scale: isHeroCampaign ? 0.97 : 1,
+                left: isHeroCampaign ? "auto" : "50%",
+                right: isHeroCampaign ? "1.5%" : "auto",
+                x: isHeroCampaign ? 0 : "-50%",
+                width: isHeroCampaign ? "min(60vw, 820px)" : "95%",
+                maxWidth: isHeroCampaign ? "820px" : "1200px",
               }
             : undefined
         }
-        transition={{ type: "spring", stiffness: 75, damping: 20, mass: 0.8 }}
-        className="fixed top-0 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-[1200px] rounded-full border border-border backdrop-blur-md transition-all duration-300 will-change-[padding,transform,background-color]"
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 z-[100] rounded-full border border-border backdrop-blur-md will-change-transform"
 
       >
         <div className="flex items-center justify-between w-full">
