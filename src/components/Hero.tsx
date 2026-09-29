@@ -4,12 +4,13 @@ import { siteConfig } from "@/lib/config";
 
 import front1Asset from "@/assets/frente 1.jpg";
 import front2Asset from "@/assets/frente 2.jpg";
+import novaHeroAsset from "../../3e9e278d-c2d4-43c4-b0a0-8ed0bd5c669a.jpg";
 
 const heroSlides = [
   { src: front1Asset, campaign: false },
   { src: front2Asset, campaign: false },
   { src: "/rede-de-lojas-vilhenorte-barao-1.webp", campaign: true },
-  { src: "/3e9e278d-c2d4-43c4-b0a0-8ed0bd5c669a.jpg", campaign: false },
+  { src: novaHeroAsset, campaign: false },
 ];
 
 export const Hero = () => {
