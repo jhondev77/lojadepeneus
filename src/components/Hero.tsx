@@ -1,42 +1,92 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/lib/config";
 
 import front1Asset from "@/assets/frente 1.jpg";
 import front2Asset from "@/assets/frente 2.jpg";
 
+const heroSlides = [
+  { src: front1Asset, campaign: false },
+  { src: front2Asset, campaign: false },
+  { src: "/rede-de-lojas-vilhenorte-barao-1.webp", campaign: true },
+  { src: "/rede-de-lojas-vilhenorte-barao-2.webp", campaign: true },
+];
+
+const getCampaignOffset = (width: number) => {
+  if (width < 768) return { x: 0, y: 0 };
+  if (width < 1200) return { x: 220, y: -70 };
+  if (width < 1440) return { x: 360, y: -80 };
+  if (width < 1700) return { x: 500, y: -85 };
+  return { x: 640, y: -90 };
+};
+
 export const Hero = () => {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 200]);
+  const scrollYPosition = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const [slide, setSlide] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(1440);
+
+  const contentX = useSpring(0, { stiffness: 70, damping: 22, mass: 0.8 });
+  const contentY = useSpring(0, { stiffness: 70, damping: 22, mass: 0.8 });
+
+  const activeSlide = heroSlides[slide];
+  const isCampaignSlide = activeSlide.campaign;
 
   useEffect(() => {
-    const interval = setInterval(() => setSlide((s) => (s + 1) % 2), 6000);
+    const interval = setInterval(() => {
+      setSlide((current) => (current + 1) % heroSlides.length);
+    }, 6000);
+
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const updateViewport = () => setViewportWidth(window.innerWidth);
+
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
+
+  useEffect(() => {
+    const offset = isCampaignSlide
+      ? getCampaignOffset(viewportWidth)
+      : { x: 0, y: 0 };
+
+    contentX.set(offset.x);
+    contentY.set(offset.y);
+
+    document.documentElement.dataset.heroCampaign = isCampaignSlide ? "true" : "false";
+    window.dispatchEvent(new Event("hero-campaign-change"));
+  }, [isCampaignSlide, viewportWidth, contentX, contentY]);
+
   return (
-    <section className="relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20">
-      {/* Background Images Fachada (slideshow) */}
+    <section className={`relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20 ${isCampaignSlide ? "hero-campaign-slide" : ""}`}>
       <div className="absolute inset-0 z-0">
-        <div
-          className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === 0 ? "opacity-100" : "opacity-0"}`}
-          style={{ backgroundImage: `url(${front1Asset})` }}
-        />
-        <div
-          className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === 1 ? "opacity-100" : "opacity-0"}`}
-          style={{ backgroundImage: `url(${front2Asset})` }}
-        />
-        <div className="absolute inset-0 bg-background/60 max-sm:bg-background/40 hero-photo-shade" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent max-sm:via-background/45 hero-photo-gradient" />
+        {heroSlides.map((item, index) => (
+          <div
+            key={item.src}
+            className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === index ? "opacity-100" : "opacity-0"}`}
+            style={{ backgroundImage: `url(${item.src})` }}
+          />
+        ))}
+        <div className={`absolute inset-0 hero-photo-shade transition-opacity duration-700 ${isCampaignSlide ? "bg-background/10" : "bg-background/60 max-sm:bg-background/40"}`} />
+        <div className={`absolute inset-0 hero-photo-gradient transition-opacity duration-700 ${isCampaignSlide ? "opacity-0" : "bg-gradient-to-t from-background via-background/30 to-transparent max-sm:via-background/45 opacity-100"}`} />
       </div>
 
-      <motion.div style={{ y, opacity }} className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16">
-        <div className="grid grid-cols-1 gap-12 items-center">
+      <motion.div
+        style={{ y: scrollYPosition, opacity }}
+        className="container relative z-20 px-6 lg:pr-1 w-full mx-auto max-sm:mt-12 md:mt-16"
+      >
+        <motion.div
+          style={{ x: contentX, y: contentY }}
+          className={`grid grid-cols-1 gap-12 items-center transition-colors ${isCampaignSlide ? "lg:max-w-[44rem] md:rounded-3xl md:bg-black/15 md:backdrop-blur-[2px] md:p-6" : ""}`}
+        >
           <div className="text-left">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -48,14 +98,12 @@ export const Hero = () => {
               </span>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col max-sm:mb-2 md:mb-6 mt-36"
             >
-              {/* Logo removed as requested to keep only fixed navbar logo */}
-
               <div className="mb-6 h-px w-20 bg-energy/50" />
 
               <h1 className="text-2xl sm:text-3xl md:text-[clamp(1.8rem,3.6vw,3.8rem)] font-black text-foreground mb-4 tracking-tighter uppercase leading-[1.1] font-manrope [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
@@ -64,7 +112,7 @@ export const Hero = () => {
                 <span className="text-energy italic">O SEU VEÍCULO.</span>
               </h1>
             </motion.div>
-            
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -74,23 +122,23 @@ export const Hero = () => {
               Pneus e serviços automotivos para quem exige confiança, segurança e durabilidade.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
               className="flex flex-col max-sm:gap-2 md:flex-row items-center justify-start gap-6"
             >
-              <motion.a 
+              <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href={`https://wa.me/${siteConfig.whatsapp}?text=Olá! Vim pelo site da Vilhenorte e gostaria de fazer um orçamento.`} 
+                href={`https://wa.me/${siteConfig.whatsapp}?text=Olá! Vim pelo site da Vilhenorte e gostaria de fazer um orçamento.`}
                 className="bg-energy text-white px-8 py-4 font-bold text-sm tracking-[0.1em] hover:bg-energy-dark transition-all duration-300 w-full md:w-auto text-center shadow-lg font-manrope group relative overflow-hidden rounded-full"
               >
                 <div className="absolute inset-0 bg-noise pointer-events-none opacity-10 group-hover:opacity-20 transition-opacity" />
                 <span className="relative z-10">FAZER ORÇAMENTO ↗</span>
               </motion.a>
 
-              <motion.a 
+              <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#sobre"
@@ -100,7 +148,7 @@ export const Hero = () => {
               </motion.a>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
@@ -113,9 +161,8 @@ export const Hero = () => {
               <span>CONFIANÇA</span>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
-
     </section>
   );
 };

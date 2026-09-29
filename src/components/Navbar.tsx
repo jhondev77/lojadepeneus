@@ -32,7 +32,41 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [isHeroCampaign, setIsHeroCampaign] = useState(false);
+  const [campaignNavOffset, setCampaignNavOffset] = useState(0);
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    const syncHeroCampaign = () => {
+      setIsHeroCampaign(document.documentElement.dataset.heroCampaign === "true");
+    };
+
+    const updateCampaignNavOffset = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setCampaignNavOffset(0);
+      } else if (width < 1200) {
+        setCampaignNavOffset(90);
+      } else if (width < 1440) {
+        setCampaignNavOffset(150);
+      } else if (width < 1700) {
+        setCampaignNavOffset(210);
+      } else {
+        setCampaignNavOffset(270);
+      }
+    };
+
+    syncHeroCampaign();
+    updateCampaignNavOffset();
+
+    window.addEventListener("hero-campaign-change", syncHeroCampaign);
+    window.addEventListener("resize", updateCampaignNavOffset);
+
+    return () => {
+      window.removeEventListener("hero-campaign-change", syncHeroCampaign);
+      window.removeEventListener("resize", updateCampaignNavOffset);
+    };
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem("vn-theme");
@@ -97,7 +131,11 @@ export const Navbar = () => {
             : `rgba(255, 255, 255, ${isScrolled ? 0.9 : 0.6})`,
           marginTop: navMarginTop,
         }}
-        className="fixed top-0 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-[1200px] rounded-full border border-border backdrop-blur-md transition-all duration-300 will-change-[padding,transform,background-color]"
+        style={{
+          left: `calc(50% + ${isHeroCampaign ? campaignNavOffset : 0}px)`,
+          width: isHeroCampaign ? "min(62vw, 900px)" : "95%",
+        }}
+        className="fixed top-0 -translate-x-1/2 z-[100] rounded-full border border-border backdrop-blur-md transition-[left,width,padding,background-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[left,width,transform,background-color]"
 
       >
         <div className="flex items-center justify-between w-full">
