@@ -117,15 +117,31 @@ export const Hero = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="flex flex-col max-sm:gap-2 md:flex-row items-center justify-start gap-6"
             >
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href={`https://wa.me/${siteConfig.whatsapp}?text=Olá! Vim pelo site da Vilhenorte e gostaria de fazer um orçamento.`}
-                className="bg-energy text-white px-8 py-4 font-bold text-sm tracking-[0.1em] hover:bg-energy-dark transition-all duration-300 w-full md:w-auto text-center shadow-lg font-manrope group relative overflow-hidden rounded-full"
-              >
-                <div className="absolute inset-0 bg-noise pointer-events-none opacity-10 group-hover:opacity-20 transition-opacity" />
-                <span className="relative z-10">FAZER ORÇAMENTO ↗</span>
-              </motion.a>
+              <div className="flex flex-col items-center w-full md:w-auto">
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={`https://wa.me/${siteConfig.whatsapp}?text=Olá! Vim pelo site da Vilhenorte e gostaria de fazer um orçamento.`}
+                  className="bg-energy text-white px-8 py-4 font-bold text-sm tracking-[0.1em] hover:bg-energy-dark transition-all duration-300 w-full md:w-auto text-center shadow-lg font-manrope group relative overflow-hidden rounded-full"
+                >
+                  <div className="absolute inset-0 bg-noise pointer-events-none opacity-10 group-hover:opacity-20 transition-opacity" />
+                  <span className="relative z-10">FAZER ORÇAMENTO ↗</span>
+                </motion.a>
+
+                {isLastSlide && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.9 }}
+                    className="inline-flex items-center max-sm:gap-3 md:gap-4 bg-background/60 max-sm:px-4 md:px-6 max-sm:py-2 md:py-2.5 rounded-full mt-3 border border-border backdrop-blur-xl shadow-2xl relative max-w-full"
+                  >
+                    <div className="w-2 h-2 bg-energy animate-pulse rounded-full shadow-[0_0_8px_rgba(1,94,42,0.8)]" />
+                    <span className="max-sm:text-[9px] md:text-[10px] font-black uppercase max-sm:tracking-[0.18em] md:tracking-[0.4em] max-sm:leading-relaxed text-foreground/90">
+                      CACOAL / RONDÔNIA — {siteConfig.slogan}
+                    </span>
+                  </motion.div>
+                )}
+              </div>
 
               <motion.a
                 whileHover={{ scale: 1.05 }}
@@ -136,21 +152,6 @@ export const Hero = () => {
                 CONHECER A LOJA ↓
               </motion.a>
             </motion.div>
-
-            {!isLastSlide && null}
-            {isLastSlide && (
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                className="inline-flex items-center max-sm:gap-3 md:gap-4 bg-background/60 max-sm:px-4 md:px-6 max-sm:py-2 md:py-2.5 rounded-full mt-3 md:mt-4 border border-border backdrop-blur-xl shadow-2xl relative max-w-full"
-              >
-                <div className="w-2 h-2 bg-energy animate-pulse rounded-full shadow-[0_0_8px_rgba(1,94,42,0.8)]" />
-                <span className="max-sm:text-[9px] md:text-[10px] font-black uppercase max-sm:tracking-[0.18em] md:tracking-[0.4em] max-sm:leading-relaxed text-foreground/90">
-                  CACOAL / RONDÔNIA — {siteConfig.slogan}
-                </span>
-              </motion.div>
-            )}
 
             <motion.div
               initial={{ opacity: 0 }}
