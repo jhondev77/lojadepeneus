@@ -109,17 +109,29 @@ export const Navbar = () => {
             : `rgba(255, 255, 255, ${isScrolled ? 0.9 : 0.6})`,
           marginTop: navMarginTop,
         }}
-        animate={!isMobile ? {
-          left: "50%",
-          right: "auto",
-          x: "-50%",
-          y: isHeroCampaign ? 8 : 0,
-          width: "95%",
-          maxWidth: "1200px",
-          scale: isHeroCampaign ? 0.88 : 1,
-        } : undefined}
+        animate={!isMobile ? (isHeroCampaign ? "campaign" : "normal") : undefined}
+        variants={{
+          normal: {
+            left: "50%",
+            right: "auto",
+            x: "-50%",
+            y: 0,
+            width: "95%",
+            maxWidth: "1200px",
+            scale: 1,
+          },
+          campaign: {
+            left: "50%",
+            right: "auto",
+            x: "-50%",
+            y: 8,
+            width: "95%",
+            maxWidth: "1200px",
+            scale: 0.88,
+          },
+        }}
         transition={{
-          duration: 0.65,
+          duration: 0.7,
           ease: [0.22, 1, 0.36, 1],
         }}
         className="fixed top-0 z-[100] rounded-full border border-border backdrop-blur-md will-change-transform"
