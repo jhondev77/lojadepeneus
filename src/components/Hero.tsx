@@ -5,6 +5,13 @@ import { siteConfig } from "@/lib/config";
 import front1Asset from "@/assets/frente 1.jpg";
 import front2Asset from "@/assets/frente 2.jpg";
 
+const heroSlides = [
+  { type: "asset", src: front1Asset },
+  { type: "asset", src: front2Asset },
+  { type: "url", src: "/rede-de-lojas-vilhenorte-barao-1.webp" },
+  { type: "url", src: "/rede-de-lojas-vilhenorte-barao-2.webp" },
+];
+
 export const Hero = () => {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 200]);
@@ -13,22 +20,21 @@ export const Hero = () => {
   const [slide, setSlide] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => setSlide((s) => (s + 1) % 2), 6000);
+    const interval = setInterval(() => setSlide((s) => (s + 1) % heroSlides.length), 6000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="relative max-sm:h-auto max-sm:pb-10 md:h-[90vh] min-h-[700px] w-full flex max-sm:items-end md:items-center justify-center bg-background pt-20">
-      {/* Background Images Fachada (slideshow) */}
+      {/* Background Images Fachada + artes da Rede de Lojas (slideshow) */}
       <div className="absolute inset-0 z-0">
-        <div
-          className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === 0 ? "opacity-100" : "opacity-0"}`}
-          style={{ backgroundImage: `url(${front1Asset})` }}
-        />
-        <div
-          className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === 1 ? "opacity-100" : "opacity-0"}`}
-          style={{ backgroundImage: `url(${front2Asset})` }}
-        />
+        {heroSlides.map((item, index) => (
+          <div
+            key={item.src}
+            className={`absolute inset-0 bg-cover bg-center max-sm:bg-contain max-sm:bg-no-repeat max-sm:[background-position:50%_42%] hero-photo-frame transition-opacity duration-1000 ease-in-out ${slide === index ? "opacity-100" : "opacity-0"}`}
+            style={{ backgroundImage: `url(${item.src})` }}
+          />
+        ))}
         <div className="absolute inset-0 bg-background/60 max-sm:bg-background/40 hero-photo-shade" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent max-sm:via-background/45 hero-photo-gradient" />
       </div>
