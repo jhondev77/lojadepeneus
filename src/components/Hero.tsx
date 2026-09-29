@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { siteConfig } from "@/lib/config";
 
 import front1Asset from "@/assets/frente 1.jpg";
@@ -34,22 +34,39 @@ export const Hero = () => {
     window.dispatchEvent(new Event("hero-campaign-change"));
   }, [isCampaignSlide]);
 
-  const getCampaignLayout = (width: number) => {
-    if (width < 768) return { x: 0, y: 0, scale: 1 };
-    if (width < 1200) return { x: 240, y: -10, scale: 0.86 };
-    if (width < 1440) return { x: 330, y: -15, scale: 0.82 };
-    if (width < 1700) return { x: 430, y: -20, scale: 0.80 };
-    return { x: 520, y: -25, scale: 0.78 };
-  };
-
-  const [viewportWidth, setViewportWidth] = useState(1440);
+  const [viewportHeight, setViewportHeight] = useState(900);
+  const heroContentRef = useRef<HTMLDivElement>(null);
+  const [campaignLift, setCampaignLift] = useState(0);
 
   useEffect(() => {
-    const updateViewport = () => setViewportWidth(window.innerWidth);
+    const updateViewport = () => setViewportHeight(window.innerHeight);
     updateViewport();
     window.addEventListener("resize", updateViewport);
     return () => window.removeEventListener("resize", updateViewport);
   }, []);
+
+  useEffect(() => {
+    if (!isCampaignSlide) {
+      setCampaignLift(0);
+      return;
+    }
+
+    const updateCampaignLift = () => {
+      const element = heroContentRef.current;
+      if (!element) return;
+
+      const top = element.getBoundingClientRect().top;
+      const safeTop = 96;
+      const maxLift = Math.max(0, top - safeTop);
+
+      // Move the whole block upward only as far as needed to keep it fully visible.
+      // Scale stays at 1, so nothing gets compacted.
+      setCampaignLift(Math.min(maxLift, viewportHeight < 760 ? 120 : 300));
+    };
+
+    const frame = requestAnimationFrame(updateCampaignLift);
+    return () => cancelAnimationFrame(frame);
+  }, [isCampaignSlide, viewportHeight]);
 
   return (
     <section
@@ -77,7 +94,8 @@ export const Hero = () => {
         className="relative z-20 w-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          animate={{ x: isCampaignSlide ? 0 : 0, y: 0, scale: 1 }}
+          ref={heroContentRef}
+          animate={{ x: 0, y: isCampaignSlide ? -campaignLift : 0, scale: 1 }}
           transition={{
             duration: 0.6,
             ease: [0.22, 1, 0.36, 1],
