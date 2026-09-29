@@ -59,9 +59,9 @@ export const Hero = () => {
       const safeTop = 96;
       const maxLift = Math.max(0, top - safeTop);
 
-      // Move the whole block upward only as far as needed to keep it fully visible.
+      // Move the whole block as far upward as possible while keeping it visible.
       // Scale stays at 1, so nothing gets compacted.
-      setCampaignLift(Math.min(maxLift, viewportHeight < 760 ? 120 : 300));
+      setCampaignLift(maxLift);
     };
 
     const frame = requestAnimationFrame(updateCampaignLift);
@@ -97,7 +97,7 @@ export const Hero = () => {
           ref={heroContentRef}
           animate={{ x: 0, y: isCampaignSlide ? -campaignLift : 0, scale: 1 }}
           transition={{
-            duration: 0.6,
+            duration: 0.8,
             ease: [0.22, 1, 0.36, 1],
           }}
           style={{ transformOrigin: isCampaignSlide ? "left center" : "right center" }}
