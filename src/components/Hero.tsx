@@ -61,6 +61,20 @@ export const Hero = () => {
         />
       </div>
 
+      {isLastSlide && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+          className="absolute z-30 right-4 bottom-5 sm:right-6 sm:bottom-6 md:right-10 md:bottom-8 lg:right-14 lg:bottom-10 inline-flex items-center gap-3 md:gap-4 bg-background/60 px-4 md:px-6 py-2 md:py-2.5 rounded-full border border-border backdrop-blur-xl shadow-2xl whitespace-nowrap"
+        >
+          <div className="w-2 h-2 bg-energy animate-pulse rounded-full shadow-[0_0_8px_rgba(1,94,42,0.8)]" />
+          <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.18em] md:tracking-[0.4em] leading-relaxed text-foreground/90">
+            CACOAL / RONDÔNIA — {siteConfig.slogan}
+          </span>
+        </motion.div>
+      )}
+
       <motion.div
         style={{ y, opacity }}
         className="relative z-20 w-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-sm:mt-12 md:mt-16"
@@ -127,20 +141,6 @@ export const Hero = () => {
                   <div className="absolute inset-0 bg-noise pointer-events-none opacity-10 group-hover:opacity-20 transition-opacity" />
                   <span className="relative z-10">FAZER ORÇAMENTO ↗</span>
                 </motion.a>
-
-                {isLastSlide && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.9 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 inline-flex items-center max-sm:gap-3 md:gap-4 bg-background/60 max-sm:px-4 md:px-6 max-sm:py-2 md:py-2.5 rounded-full border border-border backdrop-blur-xl shadow-2xl relative whitespace-nowrap"
-                  >
-                    <div className="w-2 h-2 bg-energy animate-pulse rounded-full shadow-[0_0_8px_rgba(1,94,42,0.8)]" />
-                    <span className="max-sm:text-[9px] md:text-[10px] font-black uppercase max-sm:tracking-[0.18em] md:tracking-[0.4em] max-sm:leading-relaxed text-foreground/90">
-                      CACOAL / RONDÔNIA — {siteConfig.slogan}
-                    </span>
-                  </motion.div>
-                )}
               </div>
 
               <motion.a
