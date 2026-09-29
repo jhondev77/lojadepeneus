@@ -34,6 +34,7 @@ const images = [
   { url: interior, title: "ESTRUTURA", desc: "Instalações modernas", category: "ESTRUTURA" },
   { url: produtos, title: "PRODUTOS", desc: "As melhores marcas", category: "PNEUS" },
   { url: pneu_detalhe, title: "SEGURANÇA", desc: "Check-up completo", category: "TECNOLOGIA" },
+  { url: "https://raw.githubusercontent.com/jhondev77/lojadepeneus/main/3e9e278d-c2d4-43c4-b0a0-8ed0bd5c669a.jpg", title: "ESTRUTURA", desc: "Vilhenorte Pneus", category: "ESTRUTURA" },
 ];
 
 const categories = ["TODAS", "FACHADA", "ESTRUTURA", "TECNOLOGIA", "PNEUS", "AGRÍCOLA", "ATENDIMENTO"];
