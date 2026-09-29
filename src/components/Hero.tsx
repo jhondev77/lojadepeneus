@@ -80,7 +80,7 @@ export const Hero = () => {
         className="relative z-20 w-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-sm:mt-12 md:mt-16"
       >
         <motion.div
-          animate={{ x: 0, y: isCampaignSlide ? 110 : 0, scale: isCampaignSlide ? 0.68 : 1 }}
+          animate={{ x: 0, y: isCampaignSlide ? 160 : 0, scale: isCampaignSlide ? 0.68 : 1 }}
           transition={{
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
