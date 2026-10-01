@@ -98,6 +98,7 @@ function Index() {
       <Marquee />
       
       <TireSection />
+      <OtherStores />
       <Services />
       <About />
       <Agricultural />
@@ -107,7 +108,6 @@ function Index() {
       <Gallery />
       <Contact />
       <FAQ />
-      <OtherStores />
       <Footer />
       <Schema />
     </div>
